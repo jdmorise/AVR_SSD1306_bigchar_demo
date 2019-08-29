@@ -17,6 +17,8 @@ i2c.c/i2c.h - I2C abstraction layer (using the hardware TWI block)
 lcd.c/lcd.h - definitions and functions to control the OLED display
 fonts - folder containing all relevant fonts, including Indie Flower in different sizes and a generic 6x8 ascii font
 
+The font can be changed by changing the #include statement in the lcd.c file and recompiling. If the size is changed, the respective character_height and character_width need to be set properly. 
+
 # Contributors
 The LCD  library has been developed by Michael Köhler, it was adapted and split into two parts to separate the LCD and I2C libraries. The basic description is found in a microcontroller.net forum. 
 https://www.mikrocontroller.net/topic/415651
