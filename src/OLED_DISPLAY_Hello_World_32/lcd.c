@@ -41,11 +41,11 @@
 #include "i2c.h"
 #include "lcd.h"
 #include <avr/interrupt.h>
-#include "./fonts/Liberation Serif_24.h"
+#include "./fonts/Ubuntu Mono_32.h"
 #include "./fonts/ascii_6x8.h"
 
-#define CHAR_HEIGHT CHAR_HEIGHT_24
-#define CHAR_WIDTH CHAR_WIDTH_24
+#define CHAR_HEIGHT CHAR_HEIGHT_32
+#define CHAR_WIDTH CHAR_WIDTH_32
 
 void lcd_init(uint8_t dispAttr){
     if(LCD_INIT_I2C == YES) i2c_init();
@@ -272,10 +272,11 @@ void lcd_update_4(uint8_t c3, uint8_t c2, uint8_t c1, uint8_t c0){
 	/*if(c3 == 0)
 		lcd_clear_bigc(0); 
 	else*/
-	lcd_put_bigc(char_addr[10], 48, char_width[10], CHAR_WIDTH, CHAR_HEIGHT);
+
 	lcd_put_bigc (char_addr[c3], 0, char_width[c3], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (char_addr[c2], 24, char_width[c2], CHAR_WIDTH, CHAR_HEIGHT);	
-	lcd_put_bigc (char_addr[c1], 72, char_width[c1], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (char_addr[c0], 96, char_width[c0], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c2], 26, char_width[c2], CHAR_WIDTH, CHAR_HEIGHT);	
+	lcd_put_bigc(char_addr[c1], 52, char_width[c1], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[2], 78, char_width[2], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c0], 104, char_width[c0], CHAR_WIDTH, CHAR_HEIGHT);
 
 }

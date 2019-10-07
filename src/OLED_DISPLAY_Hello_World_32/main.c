@@ -29,13 +29,6 @@
 
 //#########################################################
 // 
-// Version 0.2.1
-// Minor Updates for new format of include headers
-//
-//#########################################################
-
-//#########################################################
-// 
 // Version 0.2.0
 // Initial Version 
 //
@@ -69,14 +62,9 @@ uint16_t timer_reg_val = 1000;
 
 /* EEPROM Variables */ 
 uint8_t EEMEM EE_timer_cal_div = (1 << CS11);
-uint16_t EEMEM EE_timer_cal_val = 13590; // Calibrated Timer Value (division of 8) 
-uint16_t EEMEM EE_timer_reg_val = 932; // Calibrated Regular Timer Value  (division of 1024) 
+uint16_t EEMEM EE_timer_cal_val = 11265; // Calibrated Timer Value (division of 8) 
+uint16_t EEMEM EE_timer_reg_val = 930; // Calibrated Regular Timer Value  (division of 1024) 
 
-// correct initial values of TIME
-uint8_t EEMEM EE_init_hour_ten = 0; 
-uint8_t EEMEM EE_init_hour_one = 0; 
-uint8_t EEMEM EE_init_min_ten = 0; 
-uint8_t EEMEM EE_init_min_one = 0; 
 
 /* Timer Interrupt */
 ISR(TIMER1_COMPA_vect){
@@ -90,9 +78,15 @@ ISR(TIMER1_COMPA_vect){
 		 TCNT1 = 0; 
 		 
 		 if(update_lcd == 1){
-		 	lcd_update_4(min_ten, min_one, sec_ten, sec_one); 
-			update_lcd = 0; 
+			if(sec_ten & 1){
+		 		lcd_update_4(0, 1, 2, 3); 
 			}
+			else {	
+		 		lcd_update_4(4, 3, 5, 6); 
+			}
+
+			update_lcd = 0; 
+		}
 	}	
 
 	if (msec == 5){	
@@ -119,10 +113,6 @@ ISR(TIMER1_COMPA_vect){
 	}
 }
 
-
-// Main function
-//  
-
 void lcd_clear_screen(){
 
 	for(uint8_t i = 0; i<8; i++) {
@@ -132,17 +122,20 @@ void lcd_clear_screen(){
 
 }
 
+// Main function
+//  
+
 int main (void)
 {
 	/* Init OLED Display */
 	
     lcd_init(LCD_DISP_ON);
-    lcd_clear_screen(); 
+	lcd_clear_screen();
         
      /* put string to display (line 7) with linefeed */
     
 	lcd_gotoxy(0,7); 
-	lcd_puts("Smokum Regular 40");
+	lcd_puts("Ubuntu Mono 32");
 	lcd_home();
 	lcd_set_contrast(196);
 
@@ -166,20 +159,23 @@ int main (void)
 	sei();
 
 	/* Initialize time variables */ 
-	sec_one = 7;
-	sec_ten = 2; 
+	sec_one = 6;
+	sec_ten = 3;
 
+	min_one = 1;
 	min_ten = 3;
-	min_one = 4;
 
+	hour_one = 8;
 	hour_ten = 0;
-	hour_one = 0; 
+
 
 	/* Update LCD Display */ 
+	
+	lcd_update_4(0, 1, 2, 3); 
 
-	lcd_update_4(min_ten, min_one, sec_ten, sec_one);  
+	//lcd_update_4(min_ten, min_one, sec_ten, sec_one);  
 
-	//lcd_update_6(hour_ten, hour_one, min_ten, min_one, sec_ten, sec_one);  
+
 
 
 	while (1) {}

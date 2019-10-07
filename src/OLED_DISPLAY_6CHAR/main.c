@@ -62,16 +62,9 @@ uint16_t timer_reg_val = 1000;
 
 /* EEPROM Variables */ 
 uint8_t EEMEM EE_timer_cal_div = (1 << CS11);
-uint16_t EEMEM EE_timer_cal_val = 13590; // Calibrated Timer Value (division of 8) 
+uint16_t EEMEM EE_timer_cal_val = 11265; // Calibrated Timer Value (division of 8) 
 uint16_t EEMEM EE_timer_reg_val = 930; // Calibrated Regular Timer Value  (division of 1024) 
 
-// correct initial values of TIME
-uint8_t EEMEM EE_init_hour_ten = 2; 
-uint8_t EEMEM EE_init_hour_one = 3; 
-uint8_t EEMEM EE_init_min_ten = 5; 
-uint8_t EEMEM EE_init_min_one = 9;
-uint8_t EEMEM EE_init_sec_ten = 5; 
-uint8_t EEMEM EE_init_sec_one = 0;
 
 /* Timer Interrupt */
 ISR(TIMER1_COMPA_vect){
@@ -114,6 +107,14 @@ ISR(TIMER1_COMPA_vect){
 	}
 }
 
+void lcd_clear_screen(){
+
+	for(uint8_t i = 0; i<8; i++) {
+		lcd_gotoxy(0, i); 
+		lcd_puts("                      "); 
+	}
+
+}
 
 // Main function
 //  
@@ -123,12 +124,12 @@ int main (void)
 	/* Init OLED Display */
 	
     lcd_init(LCD_DISP_ON);
-	lcd_clrscr();
+	lcd_clear_screen();
         
      /* put string to display (line 7) with linefeed */
     
 	lcd_gotoxy(0,7); 
-	lcd_puts("OLED Clock                       ");
+	lcd_puts("Liberation Serif 24");
 	lcd_home();
 	lcd_set_contrast(196);
 
@@ -152,14 +153,14 @@ int main (void)
 	sei();
 
 	/* Initialize time variables */ 
-	sec_one = eeprom_read_byte(&EE_init_sec_one);
-	sec_ten = eeprom_read_byte(&EE_init_sec_ten); 
+	sec_one = 6;
+	sec_ten = 4;
 
-	min_one = eeprom_read_byte(&EE_init_min_one);
-	min_ten = eeprom_read_byte(&EE_init_min_ten);
+	min_one = 1;
+	min_ten = 3;
 
-	hour_one = eeprom_read_byte(&EE_init_hour_one); 
-	hour_ten = eeprom_read_byte(&EE_init_hour_ten);
+	hour_one = 8;
+	hour_ten = 0;
 
 
 	/* Update LCD Display */ 

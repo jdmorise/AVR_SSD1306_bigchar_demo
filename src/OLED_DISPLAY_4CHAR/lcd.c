@@ -41,7 +41,7 @@
 #include "i2c.h"
 #include "lcd.h"
 #include <avr/interrupt.h>
-#include "./fonts/Indie Flower Regular_digits_40.h"
+#include "./fonts/Smokum Regular_40.h"
 #include "./fonts/ascii_6x8.h"
 
 #define CHAR_HEIGHT CHAR_HEIGHT_40
@@ -256,14 +256,14 @@ void lcd_update_6(uint8_t c5,uint8_t c4,uint8_t c3, uint8_t c2, uint8_t c1, uint
 	if(c3 == 0)
 		lcd_clear_bigc(0, CHAR_HEIGHT); 
 	else
-		lcd_put_bigc (bitmap_addr[c5], 0, char_width[c5], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_addr[c4], 18, char_width[c4], CHAR_WIDTH, CHAR_HEIGHT);	
-	lcd_put_bigc (bitmap_colon, 42, char_width[10], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_addr[c3], 42, char_width[c3], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_addr[c2], 60, char_width[c2], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_colon, 78, char_width[10], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_addr[c1], 85, char_width[c1], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_addr[c0], 103, char_width[c0], CHAR_WIDTH, CHAR_HEIGHT);
+		lcd_put_bigc (char_addr[c5], 0, char_width[c5], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c4], 18, char_width[c4], CHAR_WIDTH, CHAR_HEIGHT);	
+	lcd_put_bigc (char_addr[10], 42, char_width[10], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c3], 42, char_width[c3], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c2], 60, char_width[c2], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[10], 78, char_width[10], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c1], 85, char_width[c1], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c0], 103, char_width[c0], CHAR_WIDTH, CHAR_HEIGHT);
 
 }
 
@@ -272,10 +272,10 @@ void lcd_update_4(uint8_t c3, uint8_t c2, uint8_t c1, uint8_t c0){
 	/*if(c3 == 0)
 		lcd_clear_bigc(0); 
 	else*/
-	lcd_put_bigc(bitmap_colon, 48, char_width[10], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_addr[c3], 0, char_width[c3], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_addr[c2], 24, char_width[c2], CHAR_WIDTH, CHAR_HEIGHT);	
-	lcd_put_bigc (bitmap_addr[c1], 72, char_width[c1], CHAR_WIDTH, CHAR_HEIGHT);
-	lcd_put_bigc (bitmap_addr[c0], 96, char_width[c0], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc(char_addr[10], 48, char_width[10], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c3], 0, char_width[c3], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c2], 24, char_width[c2], CHAR_WIDTH, CHAR_HEIGHT);	
+	lcd_put_bigc (char_addr[c1], 72, char_width[c1], CHAR_WIDTH, CHAR_HEIGHT);
+	lcd_put_bigc (char_addr[c0], 96, char_width[c0], CHAR_WIDTH, CHAR_HEIGHT);
 
 }
