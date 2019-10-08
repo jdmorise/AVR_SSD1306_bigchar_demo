@@ -9,8 +9,7 @@ The repository contains 3 projects:
 	Hello World with different fonts, alternating "Hello" and "World" every 10 seconds. 
 	
 # Used Software
-The source code is a demonstration of displaying huge characters in any kind of Font. The fonts have been created with the python code in https://github.com/jdmorise/TTF2BMH. The description is still WIP
-Several Fonts can be downloaded from https://github.com/jdmorise/AVR_BMH-fonts. 
+The source code is a demonstration of displaying huge characters in any kind of Font. The fonts have been created with the python code in https://github.com/jdmorise/TTF2BMH. Several Fonts can be downloaded from https://github.com/jdmorise/AVR_BMH-fonts. 
 
 # Code Overview
 The code contains the following functions and libraries:    
